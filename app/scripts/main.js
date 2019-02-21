@@ -14,6 +14,13 @@
         icon.text('search').parents('.content').removeClass('searching')
       }
     })
+  /**
+   * menu item
+   */
+  $('.ui.navbar .menu > a.item')
+    .click(function() {
+      $(this).addClass('active').siblings().removeClass('active');
+    })
 
   /**
    * hero
@@ -35,11 +42,11 @@
    * sidebar
    */
   $('.ui.sidebar')
-    .sidebar('setting', 'dimPage', false)
+    .sidebar('setting', 'dimPage', false) // 去掉显示边栏时页面变暗的效果
     .sidebar('attach events', '.ui.navbar .menu-icon')
     .sidebar('attach events', '.ui.sidebar .close-icon')
 
-  $('.ui.navbar .menu')
+  $('.ui.navbar .menu')  // 克隆导航栏上的菜单到边栏 jQuery 提供
     .clone()
     .appendTo('.ui.sidebar')
 

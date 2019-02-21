@@ -12,7 +12,7 @@ import del from 'del';
 import runSequence from 'run-sequence';
 import browserSync from 'browser-sync';
 import swPrecache from 'sw-precache';
-import gulpLoadPlugins from 'gulp-load-plugins';
+import gulpLoadPlugins from 'gulp-load-plugins'; //按需加载gulp所需的包
 import {output as pagespeed} from 'psi';
 import pkg from './package.json';
 
@@ -32,14 +32,15 @@ gulp.task('lint', () =>
 );
 
 // Optimize images
+// 构建任务的方法
 gulp.task('images', () =>
-  gulp.src('app/images/**/*')
-    .pipe($.imagemin({
+  gulp.src('app/images/**/*')  //导入要处理的文件
+    .pipe($.imagemin({         // 管道 * 使用导入进来的包提供的功能去处理文件。imagemin处理图片尺寸，imagemin也是个包
       progressive: true,
       interlaced: true
     }))
-    .pipe(gulp.dest('dist/images'))
-    .pipe($.size({title: 'images'}))
+    .pipe(gulp.dest('dist/images'))  //把处理好的文件放入指定的目录
+    .pipe($.size({title: 'images'})) //显示处理的文件的尺寸
 );
 
 // Copy all files at the root level (app)
@@ -155,7 +156,7 @@ gulp.task('watch-ui', uiWatch);
 gulp.task('build-ui', uiBuild);
 
 // Watch files for changes & reload
-gulp.task('serve', ['scripts', 'styles'], () => {
+gulp.task('serve', ['scripts', 'styles'], () => {  // 先执行scripts 和styles才行
   browserSync({
     notify: false,
     // Customize the Browsersync console logging prefix
@@ -166,11 +167,11 @@ gulp.task('serve', ['scripts', 'styles'], () => {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
-    server: ['.tmp', 'app', 'node_modules', 'semantic/dist'],
+    server: ['.tmp', 'app', 'node_modules', 'semantic/dist'],// 服务器允许使用的资源目录
     port: 3300
   });
 
-  gulp.watch(['app/**/*.html'], reload);
+  gulp.watch(['app/**/*.html'], reload); // 监视文件的变化，然后刷新浏览器
   gulp.watch(['app/styles/**/*.{scss,css}'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js'], ['lint', 'scripts', reload]);
   gulp.watch(['app/images/**/*'], reload);

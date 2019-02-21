@@ -1,28 +1,28 @@
 .ui.sidebar {
-  background: #fff;
+  background: #fff; //边栏背景颜色
 
   .menu {
-    display: flex;
-    flex-direction: column;
+    display: flex; // 菜单中的menu
+    flex-direction: column; // 垂直排列
     text-align: right;
   }
 
   .menu .item {
-    padding: 16px;
+    padding: 16px; //内边距
     padding-right: 24px;
-    font-size: 18px;
-    color: #000;
+    font-size: 18px; // 字号
+    color: #000; // 文字颜色
 
     &.active {
-      background: #f8f8f8;
+      background: #f8f8f8; // 积极的背景
     }
 
     &:hover {
-      background: #fbfbfb;
+      background: #fbfbfb; // 鼠标滑过的变色
     }
   }
 
-  .close-icon {
+  .close-icon { // 关闭按钮
     height: 50px;
     padding: 8px;
     cursor: pointer;

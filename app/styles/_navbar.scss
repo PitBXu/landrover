@@ -1,0 +1,113 @@
+.ui.navbar {
+  background: #fff; //背景颜色 白色
+
+  .content {
+    display: flex;  // flex-box的布局方法
+    flex-direction: row;  // 横排
+    align-items: flex-end;  // 子元素对齐方式，终点在底部
+    position: relative;  // 相对位置
+    overflow: hidden;  // 溢出包装的元素会被隐藏
+  }
+
+  .menu-icon {
+    align-self: center; // 垂直居中
+    transition: all .5s;
+  }
+
+  .menu-icon i {
+    cursor: pointer;  // 鼠标指针样式
+  }
+
+  .header {
+    align-self: center; // 单独设置该标签的位置  垂直居中
+    transition: all .5s;
+  }
+
+  .header > img {  // > 表示header元素直接嵌套的img元素
+    padding: 8px; //内边距
+    width: 98px;  //图像宽度
+    box-sizing: content-box; // 内容宽度设置，使设置的宽度为图像的宽度为 98px, 再加上8px的内边距
+  }
+
+  .menu {
+    margin-left: 56px;  // 菜单的左外边距
+    transition: all .4s;
+  }
+
+  .menu .item {
+    display: inline-block;  // inline类型的块级元素，默认情况下a标签是行内元素
+    font-size: 18px;  // 字体大小
+    color: #000;   // 颜色
+    margin-left: 24px; // 左面外边距
+    margin-right: 24px;
+    padding-bottom: 32px; // 下面内边距
+    padding-top: 24px;
+  }
+
+  .menu .item.active {
+    border-bottom: 2.3px solid #000;  //黑色边框 2像素 实线 黑色
+  }
+
+  .search-icon {
+    flex-grow: 1; // 默认值0, 占用父元素剩余的宽度
+    text-align: right; // 靠右显示
+    align-self: center; // 垂直居中
+    cursor: pointer;  // 设置鼠标指针样式 hover变成手型
+  }
+
+  .search-form {
+    position: absolute;  // 绝对位置
+    transform: translateY(-120px);  // 元素在y轴移动120px
+    transition: all .5s;  // 过渡所有能应用过渡的属性
+    opacity: 0;  // 不透明度0 == 完全透明
+  }
+
+  .searching ~ .search-form {  // 找到 searching 元素的 兄弟元素 search-form
+    transform: translateY(-50px); // 向上移动 50px
+    opacity: 1;  // 不透明度0 == 完全不透明
+  }
+
+  .searching {
+    .header, .menu, .menu-icon {
+      transform: translateY(80px); // 向下移动 80 像素
+      opacity: 0;
+    }
+  }
+}
+
+/*
+  媒体查询 适应不同大小的设备
+*/
+
+@media only screen and (min-width: 767px) { // 宽度大于767px的 screen类型屏幕上面应用以下设置
+  .ui.navbar {
+    .menu-icon {
+      display: none; // 隐藏 菜单图标
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.navbar {
+    .header > img { 
+      width: 56px;
+    }
+
+    .content {
+      justify-content: space-between; // flex-box中子元素的对齐方式
+    }
+
+    .content .menu {
+      display: none; //隐藏菜单
+    }
+
+    .search-icon {
+      flex-grow: 0; // 将搜索图标和其他元素均分宽度
+    }
+
+    .searching ~ .search-form {
+      transform: translateY(-40px); // 调整在移动状态下的显示
+      opacity: 1;
+    }
+  }
+}
